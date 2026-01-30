@@ -1,0 +1,920 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gaming News & Reviews - Latest Game Updates</title>
+    <meta name="description" content="Your premier destination for gaming news, reviews, and guides. PC, Console, and Mobile gaming coverage.">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-primary: #0f172a;
+            --bg-secondary: #1e293b;
+            --bg-tertiary: #334155;
+            --text-primary: #f8fafc;
+            --text-secondary: #cbd5e1;
+            --text-muted: #94a3b8;
+            --accent-primary: #3b82f6;
+            --accent-secondary: #8b5cf6;
+            --accent-gaming: #ec4899;
+            --border-color: #334155;
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.5);
+            --radius: 8px;
+            --max-width: 1280px;
+            --header-height: 70px;
+            --transition: all 0.3s ease;
+        }
+
+        [data-theme="light"] {
+            --bg-primary: #ffffff;
+            --bg-secondary: #f1f5f9;
+            --bg-tertiary: #e2e8f0;
+            --text-primary: #0f172a;
+            --text-secondary: #334155;
+            --text-muted: #64748b;
+            --border-color: #cbd5e1;
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            transition: var(--transition);
+        }
+
+        /* Header Styles */
+        .header {
+            background-color: var(--bg-secondary);
+            border-bottom: 1px solid var(--border-color);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            height: var(--header-height);
+        }
+
+        .container {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+
+        .header-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 100%;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--accent-primary), var(--accent-gaming));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-decoration: none;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-menu a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            transition: var(--transition);
+        }
+
+        .nav-menu a:hover {
+            color: var(--accent-primary);
+        }
+
+        .header-controls {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .theme-toggle, .menu-toggle {
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
+            padding: 0.5rem;
+            border-radius: var(--radius);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .menu-toggle {
+            display: none;
+        }
+
+        /* Ad Containers */
+        .ad-container {
+            background: var(--bg-secondary);
+            border: 1px dashed var(--border-color);
+            padding: 1rem;
+            margin: 1.5rem auto;
+            text-align: center;
+            border-radius: var(--radius);
+            max-width: var(--max-width);
+        }
+
+        .ad-label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+
+        /* Featured Section */
+        .featured-section {
+            margin: 2rem 0;
+        }
+
+        .section-title {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--accent-primary);
+            font-size: 1.5rem;
+        }
+
+        .featured-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+        }
+
+        @media (min-width: 768px) {
+            .featured-grid {
+                grid-template-columns: 2fr 1fr;
+            }
+        }
+
+        .featured-main {
+            position: relative;
+            border-radius: var(--radius);
+            overflow: hidden;
+            background: var(--bg-secondary);
+            box-shadow: var(--shadow);
+        }
+
+        .featured-image {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+        }
+
+        .featured-content {
+            padding: 1.5rem;
+        }
+
+        .category-badge {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            background: var(--accent-primary);
+            color: white;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Layout */
+        .main-wrapper {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        @media (min-width: 1024px) {
+            .main-wrapper {
+                grid-template-columns: 1fr 350px;
+            }
+        }
+
+        /* Article Cards */
+        .post-card {
+            background: var(--bg-secondary);
+            border-radius: var(--radius);
+            overflow: hidden;
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            border: 1px solid var(--border-color);
+        }
+
+        .post-card:hover {
+            transform: translateY(-4px);
+        }
+
+        .post-image {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+        }
+
+        .post-content {
+            padding: 1.5rem;
+        }
+
+        .post-title {
+            font-size: 1.5rem;
+            margin-bottom: 0.75rem;
+            line-height: 1.3;
+        }
+
+        .post-title a {
+            color: var(--text-primary);
+            text-decoration: none;
+        }
+
+        .post-title a:hover {
+            color: var(--accent-primary);
+        }
+
+        .post-excerpt {
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+        }
+
+        .post-meta {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            font-size: 0.875rem;
+            color: var(--text-muted);
+            flex-wrap: wrap;
+        }
+
+        .author-avatar {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            margin-right: 0.5rem;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            position: sticky;
+            top: calc(var(--header-height) + 2rem);
+            height: fit-content;
+        }
+
+        .sidebar-widget {
+            background: var(--bg-secondary);
+            border-radius: var(--radius);
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            border: 1px solid var(--border-color);
+        }
+
+        .widget-title {
+            font-size: 1.125rem;
+            margin-bottom: 1rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 2px solid var(--accent-primary);
+            text-transform: uppercase;
+        }
+
+        .widget-list {
+            list-style: none;
+        }
+
+        .widget-list li {
+            padding: 0.75rem 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .widget-list a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            display: block;
+            transition: var(--transition);
+        }
+
+        .widget-list a:hover {
+            color: var(--accent-primary);
+            padding-left: 0.5rem;
+        }
+
+        .search-form {
+            position: relative;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            padding-right: 3rem;
+            background: var(--bg-primary);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius);
+            color: var(--text-primary);
+        }
+
+        .search-button {
+            position: absolute;
+            right: 0.5rem;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            cursor: pointer;
+        }
+
+        /* Article Page */
+        .article-header {
+            margin-bottom: 2rem;
+        }
+
+        .article-title {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+
+        .article-meta {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            flex-wrap: wrap;
+        }
+
+        .article-content {
+            font-size: 1.125rem;
+            line-height: 1.8;
+            color: var(--text-secondary);
+        }
+
+        .article-content p {
+            margin-bottom: 1.5rem;
+        }
+
+        .article-content h2 {
+            margin-top: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+        }
+
+        .article-content img {
+            border-radius: var(--radius);
+            margin: 2rem 0;
+            width: 100%;
+            box-shadow: var(--shadow);
+        }
+
+        /* Review Box */
+        .review-box {
+            background: linear-gradient(135deg, var(--bg-secondary), var(--bg-tertiary));
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius);
+            padding: 2rem;
+            margin: 2rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .review-box::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--accent-primary), var(--accent-gaming));
+        }
+
+        .review-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .review-score {
+            font-size: 3rem;
+            font-weight: 800;
+            color: var(--accent-primary);
+        }
+
+        .game-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+        }
+
+        .info-item {
+            background: var(--bg-primary);
+            padding: 1rem;
+            border-radius: var(--radius);
+            text-align: center;
+        }
+
+        .info-label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            margin-bottom: 0.25rem;
+        }
+
+        .info-value {
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        /* Author Box */
+        .author-box {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius);
+            padding: 2rem;
+            margin: 3rem 0;
+            display: flex;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .author-image {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid var(--accent-primary);
+        }
+
+        .author-details {
+            flex: 1;
+            min-width: 200px;
+        }
+
+        .author-name {
+            font-size: 1.25rem;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Related Posts */
+        .related-posts {
+            margin: 3rem 0;
+        }
+
+        .related-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .related-card {
+            background: var(--bg-secondary);
+            border-radius: var(--radius);
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+        }
+
+        .related-card img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+        }
+
+        .related-content {
+            padding: 1rem;
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--bg-secondary);
+            border-top: 1px solid var(--border-color);
+            margin-top: 4rem;
+            padding: 3rem 0 1.5rem;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        @media (min-width: 768px) {
+            .footer-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+            .menu-toggle {
+                display: block;
+            }
+            .nav-menu {
+                position: fixed;
+                top: var(--header-height);
+                left: -100%;
+                width: 100%;
+                height: calc(100vh - var(--header-height));
+                background: var(--bg-secondary);
+                flex-direction: column;
+                padding: 2rem;
+                transition: var(--transition);
+            }
+            .nav-menu.active {
+                left: 0;
+            }
+            .article-title {
+                font-size: 1.75rem;
+            }
+            .featured-image {
+                height: 250px;
+            }
+        }
+
+        .footer-section h3 {
+            font-size: 1.125rem;
+            margin-bottom: 1rem;
+        }
+
+        .footer-section p, .footer-section a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            line-height: 1.8;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid var(--border-color);
+            padding-top: 1.5rem;
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.875rem;
+        }
+
+        /* Utilities */
+        .pagination {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 2rem;
+            padding: 1rem;
+        }
+
+        .btn {
+            background: var(--accent-primary);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: var(--radius);
+            text-decoration: none;
+            display: inline-block;
+            transition: var(--transition);
+        }
+
+        .btn:hover {
+            background: var(--accent-secondary);
+            transform: translateY(-2px);
+        }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+        ::-webkit-scrollbar-track {
+            background: var(--bg-primary);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: var(--bg-tertiary);
+            border-radius: 5px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--accent-primary);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header Ad -->
+    <div class="ad-container">
+        <span class="ad-label">Advertisement</span>
+        <!-- GOOGLE ADSENSE CODE HERE -->
+        <div style="background: var(--bg-tertiary); padding: 2rem; border-radius: var(--radius);">
+            Insert AdSense Leaderboard (728x90) or Responsive Ad Code
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="container header-content">
+            <a href="/" class="logo">🎮 GAMEHUB</a>
+            
+            <nav>
+                <button class="menu-toggle" onclick="toggleMenu()" aria-label="Toggle menu">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="3" y1="12" x2="21" y2="12"></line>
+                        <line x1="3" y1="6" x2="21" y2="6"></line>
+                        <line x1="3" y1="18" x2="21" y2="18"></line>
+                    </svg>
+                </button>
+                
+                <ul class="nav-menu" id="navMenu">
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/category/news.html">Game News</a></li>
+                    <li><a href="/category/reviews.html">Reviews</a></li>
+                    <li><a href="/category/guides.html">Guides</a></li>
+                    <li><a href="/category/pc.html">PC Games</a></li>
+                    <li><a href="/category/mobile.html">Mobile Games</a></li>
+                    <li><a href="/contact.html">Contact</a></li>
+                </ul>
+            </nav>
+            
+            <div class="header-controls">
+                <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">
+                    <svg id="theme-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container">
+        
+        <!-- Featured Section -->
+        <section class="featured-section">
+            <h2 class="section-title">
+                <span>⚡</span> Trending Now
+            </h2>
+            <div class="featured-grid">
+                <article class="featured-main">
+                    <img src="https://images.unsplash.com/photo-1542751371-adc38448a05e?w=800&h=400&fit=crop" alt="Featured Game" class="featured-image">
+                    <div class="featured-content">
+                        <span class="category-badge">Breaking News</span>
+                        <h2><a href="#" style="color: var(--text-primary); text-decoration: none;">Cyberpunk 2077 Sequel Confirmed: Phantom Liberty Success Leads to New Project</a></h2>
+                        <p style="color: var(--text-secondary); margin: 1rem 0;">CD Projekt Red officially announces the next installment in the Cyberpunk universe following the massive success of the 2.0 update and Phantom Liberty expansion.</p>
+                        <div class="post-meta">
+                            <span>By Alex Chen</span>
+                            <span>Jan 30, 2026</span>
+                            <span>24 Comments</span>
+                        </div>
+                    </div>
+                </article>
+                
+                <div class="sidebar-widget" style="margin: 0;">
+                    <h3 class="widget-title">Breaking News</h3>
+                    <div style="border-bottom: 1px solid var(--border-color); padding: 1rem 0;">
+                        <a href="#" style="color: var(--text-primary); font-weight: 600;">GTA 6 Release Date Leaked?</a>
+                        <p style="font-size: 0.875rem; color: var(--text-muted); margin-top: 0.25rem;">2 hours ago</p>
+                    </div>
+                    <div style="border-bottom: 1px solid var(--border-color); padding: 1rem 0;">
+                        <a href="#" style="color: var(--text-primary); font-weight: 600;">Nintendo Switch 2 Specs Revealed</a>
+                        <p style="font-size: 0.875rem; color: var(--text-muted); margin-top: 0.25rem;">4 hours ago</p>
+                    </div>
+                    <div style="padding: 1rem 0;">
+                        <a href="#" style="color: var(--text-primary); font-weight: 600;">Elden Ring DLC Sales Hit 5M</a>
+                        <p style="font-size: 0.875rem; color: var(--text-muted); margin-top: 0.25rem;">6 hours ago</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="main-wrapper">
+            <!-- Content Area -->
+            <div class="content-area">
+                
+                <!-- In-Article Ad -->
+                <div class="ad-container">
+                    <span class="ad-label">Advertisement</span>
+                    <!-- GOOGLE ADSENSE CODE HERE -->
+                </div>
+
+                <!-- Article 1 -->
+                <article class="post-card">
+                    <img src="https://images.unsplash.com/photo-1552820728-8b83bb6b2b0a?w=800&h=400&fit=crop" alt="Game Review" class="post-image">
+                    <div class="post-content">
+                        <span class="category-badge">Review</span>
+                        <h2 class="post-title"><a href="article.html">Hades II Early Access Review: A Worthy Successor?</a></h2>
+                        <p class="post-excerpt">Supergiant Games returns with the highly anticipated sequel to their rogue-like masterpiece. We dive deep into the underworld to see if it lives up to the hype...</p>
+                        <div class="post-meta">
+                            <img src="https://i.pravatar.cc/150?img=11" alt="Author" class="author-avatar">
+                            <span>Sarah Johnson</span>
+                            <span>January 28, 2026</span>
+                            <span>⭐ 9.5/10</span>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Article 2 -->
+                <article class="post-card">
+                    <img src="https://images.unsplash.com/photo-1538481199705-c710c4e965fc?w=800&h=400&fit=crop" alt="Gaming Setup" class="post-image">
+                    <div class="post-content">
+                        <span class="category-badge">Guides</span>
+                        <h2 class="post-title"><a href="#">Best Gaming PCs Under $1000 in 2026</a></h2>
+                        <p class="post-excerpt">Building a budget gaming rig doesn't mean compromising on performance. Here are our top picks for pre-built systems and DIY builds that won't break the bank...</p>
+                        <div class="post-meta">
+                            <img src="https://i.pravatar.cc/150?img=3" alt="Author" class="author-avatar">
+                            <span>Mike Ross</span>
+                            <span>January 27, 2026</span>
+                            <span>156 Comments</span>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Article 3 -->
+                <article class="post-card">
+                    <img src="https://images.unsplash.com/photo-1542751110-97427bbecf20?w=800&h=400&fit=crop" alt="Mobile Gaming" class="post-image">
+                    <div class="post-content">
+                        <span class="category-badge">Mobile</span>
+                        <h2 class="post-title"><a href="#">Genshin Impact 6.0 Update: Everything You Need to Know</a></h2>
+                        <p class="post-excerpt">The new region opens up with massive map expansion, new characters, and endgame content. Here's your complete guide to the latest update...</p>
+                        <div class="post-meta">
+                            <img src="https://i.pravatar.cc/150?img=5" alt="Author" class="author-avatar">
+                            <span>Emma Wilson</span>
+                            <span>January 26, 2026</span>
+                            <span>89 Comments</span>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Pagination -->
+                <div class="pagination">
+                    <a href="#" class="btn">← Older Posts</a>
+                    <a href="#" class="btn">Newer Posts →</a>
+                </div>
+
+            </div>
+
+            <!-- Sidebar -->
+            <aside class="sidebar">
+                <!-- Search -->
+                <div class="sidebar-widget">
+                    <h3 class="widget-title">Search</h3>
+                    <form class="search-form" action="/search" method="get">
+                        <input type="text" class="search-input" name="q" placeholder="Search games..." required>
+                        <button type="submit" class="search-button" aria-label="Search">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="11" cy="11" r="8"></circle>
+                                <path d="m21 21-4.35-4.35"></path>
+                            </svg>
+                        </button>
+                    </form>
+                </div>
+
+                <!-- Sidebar Ad -->
+                <div class="ad-container sidebar-widget">
+                    <span class="ad-label">Advertisement</span>
+                    <!-- GOOGLE ADSENSE CODE HERE (300x250 or 300x600) -->
+                    <div style="background: var(--bg-tertiary); padding: 2rem; border-radius: var(--radius); min-height: 250px; display: flex; align-items: center; justify-content: center;">
+                        Sidebar Ad Space
+                    </div>
+                </div>
+
+                <!-- Recent Posts -->
+                <div class="sidebar-widget">
+                    <h3 class="widget-title">Recent Posts</h3>
+                    <ul class="widget-list">
+                        <li><a href="#">Steam Deck 2 Rumors Heat Up</a></li>
+                        <li><a href="#">Call of Duty 2026 Setting Revealed</a></li>
+                        <li><a href="#">Final Fantasy XVI PC Port Analysis</a></li>
+                        <li><a href="#">Xbox Game Pass January Additions</a></li>
+                        <li><a href="#">Esports World Cup 2026 Dates</a></li>
+                    </ul>
+                </div>
+
+                <!-- Categories -->
+                <div class="sidebar-widget">
+                    <h3 class="widget-title">Categories</h3>
+                    <ul class="widget-list">
+                        <li><a href="#">Game News (245)</a></li>
+                        <li><a href="#">Reviews (128)</a></li>
+                        <li><a href="#">Guides (86)</a></li>
+                        <li><a href="#">PC Games (92)</a></li>
+                        <li><a href="#">Mobile Games (64)</a></li>
+                        <li><a href="#">Esports (43)</a></li>
+                    </ul>
+                </div>
+            </aside>
+        </div>
+    </main>
+
+    <!-- Footer Ad -->
+    <div class="ad-container">
+        <span class="ad-label">Advertisement</span>
+        <!-- GOOGLE ADSENSE CODE HERE -->
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-section">
+                    <h3>About GameHub</h3>
+                    <p>Your premier destination for gaming news, in-depth reviews, and comprehensive guides. Stay updated with the latest in PC, console, and mobile gaming since 2020.</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Legal</h3>
+                    <ul class="footer-links">
+                        <li><a href="/privacy.html">Privacy Policy</a></li>
+                        <li><a href="/terms.html">Terms of Service</a></li>
+                        <li><a href="/disclaimer.html">Disclaimer</a></li>
+                        <li><a href="/contact.html">Contact Us</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Connect</h3>
+                    <p>Follow us for daily updates and exclusive content.</p>
+                    <div style="margin-top: 1rem; display: flex; gap: 1rem;">
+                        <a href="#" aria-label="Twitter">🐦</a>
+                        <a href="#" aria-label="YouTube">📺</a>
+                        <a href="#" aria-label="Discord">💬</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2026 GameHub. All rights reserved.</p>
+                <p>Designed for Gaming Enthusiasts</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Theme Toggle
+        function toggleTheme() {
+            const html = document.documentElement;
+            const currentTheme = html.getAttribute('data-theme');
+            const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+            html.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            
+            // Update icon
+            const icon = document.getElementById('theme-icon');
+            if (newTheme === 'light') {
+                icon.innerHTML = '<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>';
+            } else {
+                icon.innerHTML = '<circle cx="12" cy="12" r="5"></circle><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"></path>';
+            }
+        }
+
+        // Load saved theme
+        (function() {
+            const savedTheme = localStorage.getItem('theme') || 'dark';
+            document.documentElement.setAttribute('data-theme', savedTheme);
+            if (savedTheme === 'light') {
+                document.getElementById('theme-icon').innerHTML = '<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>';
+            }
+        })();
+
+        // Mobile Menu Toggle
+        function toggleMenu() {
+            document.getElementById('navMenu').classList.toggle('active');
+        }
+
+        // Sticky Header Effect
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('.header');
+            if (window.scrollY > 10) {
+                header.style.boxShadow = '0 4px 6px -1px rgba(0, 0, 0, 0.5)';
+            } else {
+                header.style.boxShadow = 'none';
+            }
+        });
+    </script>
+</body>
+</html>
